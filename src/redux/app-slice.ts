@@ -19,6 +19,9 @@ const appSlice = createSlice({
     toggleDarkMode(state) {
       state.isDarkMode = !state.isDarkMode;
     },
+    setDarkMode(state, action: PayloadAction<boolean>) {
+      state.isDarkMode = action.payload;
+    }
   },
 });
 

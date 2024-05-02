@@ -1,0 +1,17 @@
+export { default as AccessibilityIcon } from './icon-accessibility.svg';
+export { default as CorrectIcon } from './icon-correct.svg';
+export { default as CssIcon } from './icon-css.svg';
+export { default as ErrorIcon } from './icon-error.svg';
+export { default as HtmlIcon } from './icon-html.svg';
+export { default as IncorrectIcon } from './icon-incorrect.svg';
+export { default as JsIcon } from './icon-js.svg';
+export { default as MoonDarkIcon } from './icon-moon-dark.svg';
+export { default as MoonLightIcon } from './icon-moon-light.svg';
+export { default as SunDarkIcon } from './icon-sun-dark.svg';
+export { default as SunLightIcon } from './icon-sun-light.svg';
+export { default as PatternBackgroundDesktopDark } from './pattern-background-desktop-dark.svg';
+export { default as PatternBackgroundDesktopLight } from './pattern-background-desktop-light.svg';
+export { default as PatternBackgroundMobileDark } from './pattern-background-mobile-dark.svg';
+export { default as PatternBackgroundMobileLight } from './pattern-background-mobile-light.svg';
+export { default as PatternBackgroundTabletDark } from './pattern-background-tablet-dark.svg';
+export { default as PatternBackgroundTabletLight } from './pattern-background-tablet-light.svg';

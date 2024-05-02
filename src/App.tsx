@@ -1,10 +1,14 @@
+import { Route, Routes } from "react-router-dom";
 import "./app.css";
+import Layout from "./components/Layout";
 
 function App() {
   return (
-    <main>
-      <h1>QuizApp</h1>
-    </main>
+    <Routes>
+      <Route path="/" element={<Layout />} >
+
+      </Route>
+    </Routes>
   )
 }
 
