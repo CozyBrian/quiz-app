@@ -1,10 +1,10 @@
-export { default as AccessibilityIcon } from './icon-accessibility.svg';
-export { default as CorrectIcon } from './icon-correct.svg';
-export { default as CssIcon } from './icon-css.svg';
-export { default as ErrorIcon } from './icon-error.svg';
 export { default as HtmlIcon } from './icon-html.svg';
-export { default as IncorrectIcon } from './icon-incorrect.svg';
+export { default as AccessibilityIcon } from './icon-accessibility.svg';
 export { default as JsIcon } from './icon-js.svg';
+export { default as CssIcon } from './icon-css.svg';
+export { default as CorrectIcon } from './icon-correct.svg';
+export { default as ErrorIcon } from './icon-error.svg';
+export { default as IncorrectIcon } from './icon-incorrect.svg';
 export { default as MoonDarkIcon } from './icon-moon-dark.svg';
 export { default as MoonLightIcon } from './icon-moon-light.svg';
 export { default as SunDarkIcon } from './icon-sun-dark.svg';

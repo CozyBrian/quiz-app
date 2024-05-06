@@ -8,6 +8,7 @@ import { COLORS } from "@/constants";
 const LayoutContainer = styled.main<{ $isDark: boolean }>`
   height: 100vh;
   width: 100vw;
+  padding: 0px 12px;
 
   background-color: ${({ $isDark }) => $isDark ? COLORS.gray900 : COLORS.gray100};
   transition: background-color 0.15s ease-in-out;
@@ -17,8 +18,9 @@ const MainContainer = styled.main`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  padding-top: 26px;
   z-index: 10;
+  padding-top: 26px;
+  
   
   @media (min-width: 648px) {
     & {
@@ -38,7 +40,7 @@ const MainContainer = styled.main`
 function Layout() {
   const { isDarkMode } = useAppSelector(state => state.app);
   return (
-    <LayoutContainer $isDark={isDarkMode}>
+    <LayoutContainer $isDark={isDarkMode} className={isDarkMode ? "dark" : ""}>
       <Background /> 
       <MainContainer>
         <Header />
