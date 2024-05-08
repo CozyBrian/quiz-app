@@ -9,7 +9,7 @@ const HeaderContainer = styled.header`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
   z-index: 20;
 `
 

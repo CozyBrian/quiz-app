@@ -59,6 +59,10 @@ const QuizItemText = styled.p`
   @media (min-width: 648px) {
     font-size: 28px;
   }
+  
+  .dark & {
+    color: #fff;
+  }
 `;
 
 const CurrentQuiz = ({
