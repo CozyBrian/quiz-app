@@ -4,11 +4,12 @@ import styled from "styled-components";
 import Background from "./background";
 import { useAppSelector } from "@/hooks";
 import { COLORS } from "@/constants";
+import QuizProvider from "./QuizProvider";
 
 const LayoutContainer = styled.main<{ $isDark: boolean }>`
   height: 100vh;
   width: 100vw;
-  padding: 0px 12px;
+  padding: 0px 24px;
 
   background-color: ${({ $isDark }) => $isDark ? COLORS.gray900 : COLORS.gray100};
   transition: background-color 0.15s ease-in-out;
@@ -20,11 +21,14 @@ const MainContainer = styled.main`
   margin: 0 auto;
   z-index: 10;
   padding-top: 26px;
+  padding-bottom: 26px;
+  height: 100%;
+  overflow-y: scroll;
   
   
   @media (min-width: 648px) {
     & {
-      padding-top: 54px;
+      padding-top: 40px;
       width: 640px;
     }
   }
@@ -39,12 +43,15 @@ const MainContainer = styled.main`
 
 function Layout() {
   const { isDarkMode } = useAppSelector(state => state.app);
+
   return (
     <LayoutContainer $isDark={isDarkMode} className={isDarkMode ? "dark" : ""}>
       <Background /> 
       <MainContainer>
-        <Header />
-        <Outlet />
+        <QuizProvider>
+          <Header />
+          <Outlet />
+        </QuizProvider>
       </MainContainer>
     </LayoutContainer>
   );
