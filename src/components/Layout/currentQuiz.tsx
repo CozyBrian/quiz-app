@@ -1,4 +1,5 @@
 import { AccessibilityIcon, CssIcon, HtmlIcon, JsIcon } from '@/assets/images';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 const QuizItemContainer = styled.div<{ $showing: boolean; }>`
@@ -65,11 +66,10 @@ const QuizItemText = styled.p`
   }
 `;
 
-const CurrentQuiz = ({
-  title
-}: {
-  title: string;
-}) => {
+const CurrentQuiz = () => {
+  const { quiz } = useParams();
+  const title = quiz ?? "";
+  
   const iconData: {
     [x: string] : {
       color: string;

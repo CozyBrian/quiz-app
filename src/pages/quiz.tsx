@@ -1,9 +1,11 @@
 import { IncorrectIcon } from '@/assets/images';
 import ChoiceItem from '@/components/Quiz/choiceItem';
-import { Container } from '@/components/Styles'
+import FinishedScreen from '@/components/Quiz/finishedScreen';
+import { Container, PrimaryButton } from '@/components/Styles'
 import { COLORS, QuizData } from '@/constants';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { action } from '@/redux';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -106,51 +108,6 @@ const AnswersSection = styled.div`
   }
 `;
 
-const SubmitButton = styled.button`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 56px;
-  background-color: ${COLORS.purple};
-  border-radius: 12px;
-  padding: 12px;
-  box-shadow: 0px 16px 40px 0px rgba(143, 160, 193, 0.14);
-
-  color: #fff;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 100%; /* 28px */
-
-  
-  &:hover {
-    opacity: 50%;
-  }
-
-  .dark & {
-    box-shadow: 0px 16px 40px 0px rgba(49, 62, 81, 0.14);
-  }
-
-  @media (min-width: 648px) {
-    & {
-      height: 92px;
-      border-radius: 24px;
-      font-size: 28px;
-    }
-  }
-
-  @media (min-width: 1172px) {
-    & {
-      height: 92px;
-      padding: 20px;
-    }
-  }
-
-  transition: opacity 0.1s ease-in-out;
-`;
-
 const ErrorContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -176,62 +133,64 @@ export default function Quiz() {
   const dispatch = useAppDispatch();
   const quiz = useParams<{ quiz: string }>().quiz ?? "";
   const { currentQuestion, selectedOption, submitted, showError } = useAppSelector(state => state.quiz);
-
   const { questions } = QuizData.find(q => q.title === quiz)!
- 
+  const [isFinished, setIsFinished] = useState(false);
   
   return (
     <Container className='quiz'>
-      <QuestionSection>
-        <Upper>
-          <CurrentQuestionText>
-            Question {currentQuestion + 1} of {questions.length}
-          </CurrentQuestionText>
-          <Question>
-            {questions[currentQuestion].question}
-          </Question>
-        </Upper>
-        <Bar>
-          <BarInner $progress={(currentQuestion + 1) / questions.length} />
-        </Bar>
-      </QuestionSection>
-      <AnswersSection>
-        {
-          questions[currentQuestion].options.map((option, i) => (
-            <ChoiceItem 
-              key={option} 
-              option={OPTIONS[i]} 
-              label={option} 
-              isCorrectAnswer={option === questions[currentQuestion].answer} 
-            />
-          ))
-        }
-        <SubmitButton disabled={showError} onClick={() => {
-          if (!submitted) {
-            if (selectedOption !== undefined) {
-              dispatch(action.quiz.setSubmitted(true))
-            } else {
-              dispatch(action.quiz.setShowError(true))
-            }
-          } else {
-            if (questions[currentQuestion].answer === selectedOption) {
-              dispatch(action.quiz.addPoint())
-            }
-            if (currentQuestion < questions.length - 1) {
-              dispatch(action.quiz.nextQuestion())
-            }
+      {isFinished ? <FinishedScreen /> : (<>
+        <QuestionSection>
+          <Upper>
+            <CurrentQuestionText>
+              Question {currentQuestion + 1} of {questions.length}
+            </CurrentQuestionText>
+            <Question>
+              {questions[currentQuestion].question}
+            </Question>
+          </Upper>
+          <Bar>
+            <BarInner $progress={(currentQuestion + 1) / questions.length} />
+          </Bar>
+        </QuestionSection>
+        <AnswersSection>
+          {
+            questions[currentQuestion].options.map((option, i) => (
+              <ChoiceItem 
+                key={option} 
+                option={OPTIONS[i]} 
+                label={option} 
+                isCorrectAnswer={option === questions[currentQuestion].answer} 
+              />
+            ))
           }
-        }}>
-          {submitted ? currentQuestion < questions.length - 1 ? "Next Question" : "Finish" : "Submit Answer"}
-        </SubmitButton>
-        {showError && (
-          <ErrorContainer>
-            <img src={IncorrectIcon} alt="incorrent" />
-            Please select an answer
-          </ErrorContainer>
-        )}
-      </AnswersSection>
-
+          <PrimaryButton disabled={showError} onClick={() => {
+            if (!submitted) {
+              if (selectedOption !== undefined) {
+                dispatch(action.quiz.setSubmitted(true))
+              } else {
+                dispatch(action.quiz.setShowError(true))
+              }
+            } else {
+              if (questions[currentQuestion].answer === selectedOption) {
+                dispatch(action.quiz.addPoint())
+              }
+              if (currentQuestion < questions.length - 1) {
+                dispatch(action.quiz.nextQuestion())
+              } else {
+                setIsFinished(true)
+              }
+            }
+          }}>
+            {submitted ? currentQuestion < questions.length - 1 ? "Next Question" : "Finish" : "Submit Answer"}
+          </PrimaryButton>
+          {showError && (
+            <ErrorContainer>
+              <img src={IncorrectIcon} alt="incorrent" />
+              Please select an answer
+            </ErrorContainer>
+          )}
+        </AnswersSection>
+      </>)}
     </Container>
   )
 }

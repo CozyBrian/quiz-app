@@ -18,6 +18,11 @@ const ChoiceItemContainer = styled.button`
   padding: 12px;
   box-shadow: 0px 16px 40px 0px rgba(143, 160, 193, 0.14);
 
+  /* &:focus {
+    outline: 2px solid ${COLORS.purple};
+    outline-offset: 4px;
+  } */
+
   &.submitted {
     cursor: default;
   }
@@ -66,9 +71,6 @@ const ChoiceItemContainer = styled.button`
       padding: 17px;
     }
   }
-
-
-  transition: background-color 0.15s ease-in-out;
 `;
 
 const LeftSection = styled.div`
@@ -97,22 +99,36 @@ const ChoiceItemIcon = styled.div`
   font-size: 18px;
   font-weight: 500;
   line-height: 100%; /* 18px */
-  
-  .selected & {
+  aspect-ratio: square;
+
+  .choiceItem:hover &, .choiceItem:focus & {
+    color: ${COLORS.purple};
+    background-color: #F6E7FF;  
+  }
+
+  .submitted:hover &, .submitted:focus & {
+    color: ${COLORS.gray500};
+    background-color: ${COLORS.gray100}; 
+  }
+
+  .selected &, .selected:hover &, .selected:focus & {
     color: ${COLORS.white};
     background-color:${COLORS.purple}; 
   }
-
+  
   .selected.wrong & {
+    color: ${COLORS.white};
     background-color:${COLORS.red}; 
   }
-
+  
   .selected.correct & {
-    background-color:${COLORS.green}; 
+    color: ${COLORS.white};
+    background-color:${COLORS.green};   
   }
 
   @media (min-width: 648px) {
     & {
+      
       width: 56px;
       height: 56px;
       font-size: 28px;
@@ -125,6 +141,9 @@ const ChoiceItemIcon = styled.div`
       border-radius: 6.4px;
     }
   }
+
+  transition: color 0.15s ease-in-out;
+  transition: background-color 0.15s ease-in-out;
 `;
 
 const ChoiceItemText = styled.p`
@@ -160,6 +179,7 @@ const ChoiceItem = ({
         dispatch(action.quiz.setSelectedOption(label))
       }}
       className={classNames(
+        "choiceItem",
         isSelected ? "selected" : "",
         submitted && isSelected && isCorrect && "correct",
         submitted && isSelected && !isCorrect && "wrong",
@@ -167,7 +187,7 @@ const ChoiceItem = ({
       )} 
     >
       <LeftSection>
-        <ChoiceItemIcon>
+        <ChoiceItemIcon className="choiceIcon">
           {option}
         </ChoiceItemIcon>
         <ChoiceItemText>

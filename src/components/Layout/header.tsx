@@ -3,7 +3,6 @@ import ToggleButton from '../toggleButton'
 import { useAppDispatch, useAppSelector } from '@/hooks'
 import { action } from '@/redux'
 import CurrentQuiz from './currentQuiz'
-import { useParams } from 'react-router-dom'
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -13,14 +12,13 @@ const HeaderContainer = styled.header`
   z-index: 20;
 `
 
-const Header = () => {
-  const { quiz } = useParams();
+const Header = () => { 
   const {isDarkMode } = useAppSelector(state => state.app);
   const dispatch = useAppDispatch();
 
   return (
     <HeaderContainer>
-      <CurrentQuiz title={quiz ?? ""} />
+      <CurrentQuiz />
 
       <ToggleButton 
         toggled={isDarkMode} 

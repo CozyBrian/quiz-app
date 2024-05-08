@@ -24,6 +24,7 @@ const MainContainer = styled.main`
   padding-bottom: 26px;
   height: 100%;
   overflow-y: scroll;
+  overflow-x: visible;
   
   
   @media (min-width: 648px) {
@@ -35,8 +36,9 @@ const MainContainer = styled.main`
 
   @media (min-width: 1172px) {
     & {
+      padding: 0 20px;
       padding-top: 86px;
-      width: 1160px;
+      width: 1200px;
     }
   }
 `;
