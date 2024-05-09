@@ -7,7 +7,7 @@ import { COLORS } from "@/constants";
 import QuizProvider from "./QuizProvider";
 
 const LayoutContainer = styled.main<{ $isDark: boolean }>`
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   padding: 0px 24px;
 
@@ -22,10 +22,6 @@ const MainContainer = styled.main`
   z-index: 10;
   padding-top: 26px;
   padding-bottom: 26px;
-  height: 100%;
-  overflow-y: scroll;
-  overflow-x: visible;
-  
   
   @media (min-width: 648px) {
     & {

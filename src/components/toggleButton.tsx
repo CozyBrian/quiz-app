@@ -41,7 +41,7 @@ const ToggleButton = ({ toggled, setToggled }: ToggleButtonProps) => {
        <img src={
         toggled ? SunLightIcon : SunDarkIcon
        } alt="sun" />
-      <ToggleContainer onClick={() => setToggled(!toggled)}>
+      <ToggleContainer tabIndex={1} onClick={() => setToggled(!toggled)}>
         <ToggleCircle $toggled={toggled} />
       </ToggleContainer>
        <img src={

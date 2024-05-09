@@ -159,11 +159,13 @@ const ChoiceItemText = styled.p`
 const ChoiceItem = ({
   option,
   label,
-  isCorrectAnswer
+  isCorrectAnswer,
+  tabIndex,
 }: {
   option: string;
   label: string;
   isCorrectAnswer: boolean;
+  tabIndex: number;
 }) => {
   const {selectedOption, submitted} = useAppSelector(state => state.quiz)
   const dispatch = useAppDispatch();
@@ -173,6 +175,7 @@ const ChoiceItem = ({
 
   return (
     <ChoiceItemContainer 
+      tabIndex={tabIndex}
       onClick={() => {
         if (submitted) return;
         dispatch(action.quiz.setShowError(false))

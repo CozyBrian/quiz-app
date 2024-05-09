@@ -156,6 +156,7 @@ export default function Quiz() {
           {
             questions[currentQuestion].options.map((option, i) => (
               <ChoiceItem 
+              tabIndex={i + 2}  
                 key={option} 
                 option={OPTIONS[i]} 
                 label={option} 
@@ -163,7 +164,7 @@ export default function Quiz() {
               />
             ))
           }
-          <PrimaryButton disabled={showError} onClick={() => {
+          <PrimaryButton tabIndex={6} disabled={showError} onClick={() => {
             if (!submitted) {
               if (selectedOption !== undefined) {
                 dispatch(action.quiz.setSubmitted(true))
